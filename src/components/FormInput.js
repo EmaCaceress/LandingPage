@@ -1,30 +1,23 @@
 import Input from "./Input";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { UserContext } from "./UserContext";
 
 const FormInput = ({ inputs }) => {
     const test = useContext(UserContext);
-    const [objData, setObjData] = useState({});
     let i = -1;
 
-    const onAdd = (data) => {
-        test.addToUser(data)
-    }
-
     return (
-        <form className="form">
+        <div className="form">
             {
                 inputs.map(obj => {
-                    console.log("hola" + i)
                     i++;
                     return (
-                        <Input key={i} title={obj.title} input={obj.input} i={i} setObj={setObjData} />
+                        <Input key={i} title={obj.title} input={obj.input} />
                     )
-
                 })
             }
-            <button className="form__button" type="submit" onClick={onAdd(objData)}>Enviar</button>
-        </form>
+            <button className="form__button" type="submit" onClick={test.peticion}>Enviar</button>
+        </div>
     )
 }
 

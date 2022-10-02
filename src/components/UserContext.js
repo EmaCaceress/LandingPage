@@ -3,19 +3,20 @@ import { createContext, useState } from "react";
 export const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
-    const [userData, setUserData] = useState(['']);
+    const [userData, setUserData] = useState({});
 
-    const peticion = data => {
-        console.log(data)
+    const peticion = () => {
+        console.log(userData)
+        fetch(`/api/message/${JSON.stringify(userData)}`, { method: "POST" }).then((res) => res.json());
     }
+
     const addToUser = (data) => {
         setUserData(data);
-        peticion(data);
     }
 
     return (
         <>
-            <UserContext.Provider value={{ userData, addToUser }}>
+            <UserContext.Provider value={{ userData, addToUser, peticion }}>
                 {children}
             </UserContext.Provider>
         </>

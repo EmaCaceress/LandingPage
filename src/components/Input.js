@@ -1,12 +1,13 @@
-import { useState } from "react"
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
 
-
-const Input = ({ title, input, i, setObj }) => {
-    const [array, setArray] = useState([]);
+const Input = ({ title, input }) => {
+    const test = useContext(UserContext);
 
     const onChange = event => {
-        console.log(event.target.value + event.target.name)
-        setObj(event.target.name = event.target.value)
+        let name = event.target.name
+        let value = event.target.value
+        test.addToUser(Object.defineProperty(test.userData, name, { value: value, writable: true }))
     }
 
     return (
